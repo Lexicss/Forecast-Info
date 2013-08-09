@@ -1,0 +1,160 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/zone_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="zone_text" />
+
+    <TextView
+        android:id="@+id/offset_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/zone_text"
+        android:layout_below="@+id/zone_text"
+        android:text="offset_text" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/offset_text"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:text="time" />
+
+    <TextView
+        android:id="@+id/summaryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/offset_text"
+        android:layout_below="@+id/offset_text"
+        android:text="summary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/prepIntSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/summaryText"
+        android:layout_below="@+id/summaryText"
+        android:layout_marginTop="15dp"
+        android:text="Preciptation intensity: " />
+
+    <TextView
+        android:id="@+id/precipIntensityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/prepIntSign"
+        android:layout_alignBottom="@+id/prepIntSign"
+        android:layout_toRightOf="@+id/prepPropSign"
+        android:text="precipIntesity" />
+
+    <TextView
+        android:id="@+id/prepPropSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/prepIntSign"
+        android:layout_below="@+id/prepIntSign"
+        android:text="Preciptation propability: " />
+
+    <TextView
+        android:id="@+id/precipPropabilityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/prepPropSign"
+        android:layout_alignBottom="@+id/prepPropSign"
+        android:layout_alignLeft="@+id/precipIntensityText"
+        android:text="precipPropability" />
+
+    <TextView
+        android:id="@+id/precip_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/prepIntSign"
+        android:layout_below="@+id/prepPropSign"
+        android:layout_marginTop="16dp"
+        android:text="precip type" />
+
+    <TextView
+        android:id="@+id/temperature_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/precip_type"
+        android:layout_marginTop="41dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/dew_point_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/offset_text"
+        android:layout_below="@+id/temperature_text"
+        android:layout_marginTop="18dp"
+        android:text="dew point: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/dew_point_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dew_point_sign"
+        android:layout_alignBottom="@+id/dew_point_sign"
+        android:layout_toRightOf="@+id/dew_point_sign"
+        android:text="dewPoint" />
+
+    <TextView
+        android:id="@+id/wind_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/dew_point_text"
+        android:layout_marginTop="18dp"
+        android:text="Wind"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/wind_speed_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dew_point_sign"
+        android:layout_below="@+id/wind_sign"
+        android:text="speed: " />
+
+    <TextView
+        android:id="@+id/wind_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/wind_speed_sign"
+        android:layout_alignBottom="@+id/wind_speed_sign"
+        android:layout_alignLeft="@+id/temperature_text"
+        android:text="wind_speed" />
+
+    <TextView
+        android:id="@+id/wind_bearing_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/wind_speed_sign"
+        android:layout_below="@+id/wind_speed_sign"
+        android:text="bearing: " />
+
+    <TextView
+        android:id="@+id/wind_bearing_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/wind_bearing_sign"
+        android:layout_alignBottom="@+id/wind_bearing_sign"
+        android:layout_alignRight="@+id/wind_speed"
+        android:text="wind_bearing" />
+
+</RelativeLayout>
