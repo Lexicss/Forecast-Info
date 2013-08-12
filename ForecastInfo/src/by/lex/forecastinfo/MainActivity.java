@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import by.lex.forecast.entities.Currently;
 import by.lex.forecastinfo.interfaces.ResponseListener;
@@ -21,9 +23,14 @@ public class MainActivity extends BaseActivity implements  ResponseListener{
 	private TextView offsetText;
 	private TextView timeText;
 	private TextView summaryText;
+	private ImageView iconImage;
+	
+	private TextView preIntSign;
+	private TextView preProSign;
 	private TextView precipIntensityText;
 	private TextView precipPropabilityText;
 	private TextView precipType;
+	
 	private TextView temperatureText;
 	private TextView dewPointText;
 	private TextView windSpeed;
@@ -62,6 +69,10 @@ public class MainActivity extends BaseActivity implements  ResponseListener{
 		offsetText = (TextView) findViewById(R.id.offset_text);
 		timeText = (TextView) findViewById(R.id.timeText);
 		summaryText = (TextView) findViewById(R.id.summaryText);
+		iconImage = (ImageView) findViewById(R.id.iconImage);
+		
+		preIntSign = (TextView) findViewById(R.id.prepIntSign);
+		preProSign = (TextView) findViewById(R.id.prepPropSign);
 		precipIntensityText = (TextView) findViewById(R.id.precipIntensityText);
 		precipPropabilityText = (TextView) findViewById(R.id.precipPropabilityText);
 		precipType = (TextView) findViewById(R.id.precip_type_text);
@@ -72,70 +83,14 @@ public class MainActivity extends BaseActivity implements  ResponseListener{
 	}
 	
 	private void load() {
-		//getSpiceManager().execute(NetworkManager.getWheather(53.9, 27.33), JSON_CACHE_KEY, DurationInMillis.ALWAYS_EXPIRED, new WheatherRequestListener());
-		//Log.d("Wheather", "Request sent");
-//		Thread firstRequestThread = new Thread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				JSONParser parser = new JSONParser();
-//				JSONObject jsObject = parser.getJSONFromUrl("https://api.forecast.io/forecast/c444c4d5ae9df95db1adb6d1a3875416/53.9,27.33" );
-//				try {
-//					Object lat = jsObject.get("latitude");
-//					Object timeZone = jsObject.get("timezone");
-//					Object offset = jsObject.get("offset");
-//					Log.d("Test","lat: " + lat + " timeZone: " + timeZone + " offset: " + offset);
-//					double latitude = 0;
-//					String timezone = "";
-//					int offset_ = 0;
-//					if (lat instanceof Double) {
-//						latitude = ((Double) lat).doubleValue();
-//					}
-//					if (timeZone instanceof String) {
-//						timezone = ((String) timeZone);
-//					}
-//					if (offset instanceof Integer) {
-//						offset_ = ((Integer) offset).intValue();
-//					}
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//			
-//		}, "firstRequestThread");
-//		firstRequestThread.start();
+
 		
 		WheatherTask wheatherTask = new WheatherTask(this);
-		Double[] geoParams = {53.9, 27.33}; // for Minsk;
+		Double[] geoParams = {53.9, 27.66}; // for Minsk;
 		wheatherTask.execute(geoParams);
 		
 	}
 	
-//	private class WheatherRequestListener implements RequestListener<SimpleResponse> {
-//
-//		
-//		@Override
-//		public void onRequestFailure(SpiceException spiceException) {
-//			Log.e("Wheather", "failure: " + spiceException.getMessage());
-//		}
-//
-//		@Override
-//		public void onRequestSuccess(SimpleResponse simpleResponse) {
-//			Log.i("Wheather", "response");
-//			Log.i("Wheater", "response received. offset = " +  simpleResponse.getOffset() + " timezone = " + simpleResponse.getTimeZone());
-//		}
-//		
-//	}
-
-//	@Override
-//	public void onClick(View v) {
-//		if (v.getId() == R.id.button1) {
-//			load();
-//		}
-//	}
-
-
 	@Override
 	public void onResponseReceived(JSONObject jsonObject) {
 		Log.d("Wheather", "onResponseReceived");
@@ -152,6 +107,9 @@ public class MainActivity extends BaseActivity implements  ResponseListener{
 			Log.e("Wheather", "Error in receaving currently");
 			return;
 		}
+		
+		boolean precipationsExpected = currently.getPrecipType() != null;
+		
 		Log.i("Test", "Currently: " + currently.toString());
 		Log.i("Test", "summary: " + currently.getSummary() + " temperature: " + currently.getTemperature() + " dewPoint: " + currently.getDewPoint() + " windBearing: " + currently.getWindBearing());
 		Log.i("Test", "Preciptation Intensity: " + currently.getPrecipIntensity() + " time = " + currently.getTime());
@@ -169,9 +127,54 @@ public class MainActivity extends BaseActivity implements  ResponseListener{
 		timeText.setText(dateFormat);
 		
 		summaryText.setText(currently.getSummary());
-		precipIntensityText.setText(String.valueOf(currently.getPrecipIntensity()));
-		precipPropabilityText.setText(" " +currently.getPrecipProbability());
-		precipType.setText(currently.getPrecipType());
+		
+		String icon = currently.getIcon();
+		Log.d("Test", "icon: " + icon);
+		if (icon.equals("clear-day")) {
+			iconImage.setImageResource(R.drawable.icon_1clear_day);
+		} else if (icon.equals("clear-night")) {
+			iconImage.setImageResource(R.drawable.icon_2clear_night);
+		} else if (icon.equals("rain")) {
+			iconImage.setImageResource(R.drawable.icon_3rain);
+		} else if (icon.equals("snow")) {
+			iconImage.setImageResource(R.drawable.icon_4snow);
+		} else if (icon.equals("sleet")) {
+			iconImage.setImageResource(R.drawable.icon_5sleet);
+		} else if (icon.equals("wind")) {
+			iconImage.setImageResource(R.drawable.icon_6wind);
+		} else if (icon.equals("fog")) {
+			iconImage.setImageResource(R.drawable.icon_7fog);
+		} else if (icon.equals("cloudy")) {
+			iconImage.setImageResource(R.drawable.icon_8cloudy);
+		} else if (icon.equals("partly-cloudy-day")) {
+			iconImage.setImageResource(R.drawable.icon_9party_cloudy_day);
+		} else if (icon.equals("partly-cloudy-night")) {
+			iconImage.setImageResource(R.drawable.icon_10party_cloudy_night);
+		} else if (icon.equals("hail")) {
+			iconImage.setImageResource(R.drawable.icon_11hail);
+		} else if (icon.equals("thunderstorm")) {
+			iconImage.setImageResource(R.drawable.icon_12thunderstorm);
+		} else if (icon.equals("tornado")) {
+			iconImage.setImageResource(R.drawable.icon_13tornado);
+		}
+		
+		if (precipationsExpected) {
+			preIntSign.setVisibility(View.VISIBLE);
+			preProSign.setVisibility(View.VISIBLE);
+			precipIntensityText.setVisibility(View.VISIBLE);
+			precipPropabilityText.setVisibility(View.VISIBLE);
+			precipIntensityText.setText(String.valueOf(currently.getPrecipIntensity()));
+			precipPropabilityText.setText(" " + 
+			
+					(int)(currently.getPrecipProbability()*100) + "%");
+			precipType.setText(currently.getPrecipType());	
+		} else {
+			preIntSign.setVisibility(View.GONE);
+			preProSign.setVisibility(View.GONE);
+			precipIntensityText.setVisibility(View.GONE);
+			precipPropabilityText.setVisibility(View.GONE);
+			precipType.setText("No preciptations");
+		}
 		
 		double celciumTemperature = WheatherManager.toCelcium(currently.getTemperature());
 		temperatureText.setText(String.valueOf(Math.round(celciumTemperature)));

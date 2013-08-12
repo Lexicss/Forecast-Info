@@ -76,15 +76,23 @@ public class WheatherManager {
 	public static Currently getCurrently(JSONObject jo) {
 		Object timObj, sumObj, icnObj, preIntObj, preProObj, preTypObj, temObj, dewObj, winObj, winBeaObj;
 		Object cloObj, humObj, preObj, visObj, ozoObj;
+		boolean visibilityExists = false;
 		try {
 			JSONObject curObj = jo.getJSONObject("currently");
 			if (curObj == null) return null;
+			boolean precipationsExpected = curObj.has("precipType");
+			visibilityExists = curObj.has("visibility");
+			
 			timObj = curObj.get("time");
 			sumObj = curObj.get("summary");
 			icnObj = curObj.get("icon");
 			preIntObj = curObj.get("precipIntensity");
 			preProObj = curObj.get("precipProbability");
-			preTypObj = curObj.get("precipType");
+			if (precipationsExpected) {
+			  preTypObj = curObj.get("precipType");
+			} else {
+				preTypObj = null;
+			}
 			
 			temObj = curObj.get("temperature");
 			dewObj = curObj.get("dewPoint");
@@ -93,39 +101,71 @@ public class WheatherManager {
 			cloObj = curObj.get("cloudCover");
 			humObj = curObj.get("humidity");
 			preObj = curObj.get("pressure");
-			visObj = curObj.get("visibility");
+			if (visibilityExists) {
+				visObj = curObj.get("visibility");
+			} else {
+				visObj = null;
+			}
+			
 			ozoObj = curObj.get("ozone");
 		} catch (JSONException e) {
 			e.printStackTrace();
 			return null;
 		}
 		
-		Log.d("Wheather", "time is:" + timObj);
-		if (dewObj instanceof Integer) {
-			Log.d("Wheather", "Integer type");
+//		Log.d("Wheather", "time is:" + timObj);
+//		if (dewObj instanceof Integer) {
+//			Log.d("Wheather", "Integer type");
+//		}
+//		if (dewObj instanceof Double) {
+//			Log.d("Wheather", "Double type");
+//		}
+//		if (dewObj instanceof Float) {
+//			Log.d("Wheather", "Float type");
+//		}
+		
+		double intensity;
+		if (preIntObj instanceof Double) {
+			intensity = ((Double) preIntObj).doubleValue();
+		} else {
+			intensity = ((double) ((Integer) preIntObj).intValue());
 		}
-		if (dewObj instanceof Double) {
-			Log.d("Wheather", "Double type");
+		double propability;
+		if (preProObj instanceof Double) {
+			propability = ((Double) preProObj).doubleValue();
+		} else {
+			propability = ((double) ((Integer) preProObj).intValue());
 		}
-		if (dewObj instanceof Float) {
-			Log.d("Wheather", "Float type");
+		double visibility;
+		if (visibilityExists) {
+			visibility = ((Double)visObj).doubleValue();
+		} else {
+			visibility = 0;
 		}
+		double cloudCover;
+		if (cloObj instanceof Double) {
+			cloudCover = ((Double) cloObj).doubleValue();
+		} else {
+			cloudCover = ((double)((Integer) cloObj).intValue());
+		}
+		
+		
 		
 		
 		Currently currently = new Currently(((Integer)timObj).intValue(),
 				(String)sumObj,
 				(String)icnObj,
-				((Double)preIntObj).doubleValue(),
-				((Double)preProObj).doubleValue(),
+				intensity,
+				propability,
 				((String)preTypObj),
 				((Double)temObj).doubleValue(),
 				((Double)dewObj).intValue(),
 				((Double)winObj).doubleValue(),
 				((Integer)winBeaObj).intValue(),
-				((Double)cloObj).intValue(),
+				cloudCover,
 				((Double)humObj).doubleValue(),
 				((Double)preObj).doubleValue(),
-				((Double)visObj).doubleValue(),
+				visibility,
 				((Double)ozoObj).doubleValue());
 		return currently;
 	}

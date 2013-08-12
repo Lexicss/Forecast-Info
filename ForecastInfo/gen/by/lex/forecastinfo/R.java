@@ -22,26 +22,42 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int icon_0na=0x7f020001;
+        public static final int icon_10party_cloudy_night=0x7f020002;
+        public static final int icon_11hail=0x7f020003;
+        public static final int icon_12thunderstorm=0x7f020004;
+        public static final int icon_13tornado=0x7f020005;
+        public static final int icon_1clear_day=0x7f020006;
+        public static final int icon_2clear_night=0x7f020007;
+        public static final int icon_3rain=0x7f020008;
+        public static final int icon_4snow=0x7f020009;
+        public static final int icon_5sleet=0x7f02000a;
+        public static final int icon_6wind=0x7f02000b;
+        public static final int icon_7fog=0x7f02000c;
+        public static final int icon_8cloudy=0x7f02000d;
+        public static final int icon_9party_cloudy_day=0x7f02000e;
     }
     public static final class id {
-        public static final int action_settings=0x7f080012;
-        public static final int dew_point_sign=0x7f08000b;
-        public static final int dew_point_text=0x7f08000c;
+        public static final int action_settings=0x7f080014;
+        public static final int dew_point_sign=0x7f08000a;
+        public static final int dew_point_text=0x7f08000b;
+        public static final int iconImage=0x7f080011;
         public static final int offset_text=0x7f080001;
-        public static final int precipIntensityText=0x7f080005;
+        public static final int precipIntensityText=0x7f080004;
         public static final int precipPropabilityText=0x7f080007;
-        public static final int precip_type=0x7f08000a;
-        public static final int precip_type_text=0x7f080008;
-        public static final int prepIntSign=0x7f080004;
+        public static final int precip_type=0x7f080009;
+        public static final int precip_type_text=0x7f080013;
+        public static final int prepIntSign=0x7f080005;
         public static final int prepPropSign=0x7f080006;
+        public static final int presiptationsSign=0x7f080012;
         public static final int summaryText=0x7f080003;
-        public static final int temperature_text=0x7f080009;
+        public static final int temperature_text=0x7f080008;
         public static final int timeText=0x7f080002;
-        public static final int wind_bearing_sign=0x7f080010;
-        public static final int wind_bearing_text=0x7f080011;
-        public static final int wind_sign=0x7f08000d;
-        public static final int wind_speed=0x7f08000f;
-        public static final int wind_speed_sign=0x7f08000e;
+        public static final int wind_bearing_sign=0x7f08000f;
+        public static final int wind_bearing_text=0x7f080010;
+        public static final int wind_sign=0x7f08000c;
+        public static final int wind_speed=0x7f08000e;
+        public static final int wind_speed_sign=0x7f08000d;
         public static final int zone_text=0x7f080000;
     }
     public static final class layout {

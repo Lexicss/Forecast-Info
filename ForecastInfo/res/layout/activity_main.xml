@@ -41,15 +41,6 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/prepIntSign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/summaryText"
-        android:layout_below="@+id/summaryText"
-        android:layout_marginTop="15dp"
-        android:text="Preciptation intensity: " />
-
-    <TextView
         android:id="@+id/precipIntensityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/prepIntSign"
         android:layout_below="@+id/prepIntSign"
-        android:text="Preciptation propability: " />
+        android:text="propability: " />
 
     <TextView
         android:id="@+id/precipPropabilityText"
@@ -74,15 +65,6 @@
         android:layout_alignBottom="@+id/prepPropSign"
         android:layout_alignLeft="@+id/precipIntensityText"
         android:text="precipPropability" />
-
-    <TextView
-        android:id="@+id/precip_type_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/prepIntSign"
-        android:layout_below="@+id/prepPropSign"
-        android:layout_marginTop="16dp"
-        android:text="precip type" />
 
     <TextView
         android:id="@+id/temperature_text"
@@ -156,5 +138,37 @@
         android:layout_alignBottom="@+id/wind_bearing_sign"
         android:layout_alignRight="@+id/wind_speed"
         android:text="wind_bearing" />
+
+    <ImageView
+        android:id="@+id/iconImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/wind_speed_sign"
+        android:layout_below="@+id/summaryText"
+        android:src="@drawable/icon_0na" />
+
+    <TextView
+        android:id="@+id/presiptationsSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:layout_below="@+id/iconImage"
+        android:text="Preciptations expected" />
+
+    <TextView
+        android:id="@+id/prepIntSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/temperature_text"
+        android:layout_alignLeft="@+id/iconImage"
+        android:text="intensity: " />
+
+    <TextView
+        android:id="@+id/precip_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/presiptationsSign"
+        android:text="precip type"
+        android:textSize="16sp" />
 
 </RelativeLayout>
